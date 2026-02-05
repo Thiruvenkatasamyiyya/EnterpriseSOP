@@ -6,10 +6,18 @@
   "author": "",
   "type": "module",
   "scripts": {
-    "dev" : "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "dependencies": {
+    "@google/genai": "^1.40.0",
+    "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "nodemon": "^3.1.11"
+    "fs": "^0.0.1-security",
+    "generative-ai": "^0.1.4",
+    "mongoose": "^9.1.6",
+    "multer": "^2.0.2",
+    "nodemon": "^3.1.11",
+    "pdf-parse": "^2.4.5",
+    "pdf-parse-new": "^2.0.0"
   }
 }
