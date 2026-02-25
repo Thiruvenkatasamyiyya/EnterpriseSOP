@@ -5,13 +5,26 @@ export const extractChunksFromPDF = async (filePath) => {
   const buffer = fs.readFileSync(filePath);
   const data = await pdf(buffer);
 
-  const text = data.text;
-  const chunks = [];
-  const chunkSize = 1000;
-  const overlap = 100;
+  const text = data.text
+    .replace(/\s+/g, " ")
+    .trim();
 
-  for (let i = 0; i < text.length; i += chunkSize - overlap) {
-    chunks.push(text.substring(i, i + chunkSize));
+  const sentences = text.split(". ");
+
+  const chunks = [];
+  let temp = "";
+
+  for (let s of sentences) {
+
+    if ((temp + s).length < 800) {
+      temp += s + ". ";
+    } else {
+      chunks.push(temp);
+      temp = s + ". ";
+    }
   }
+
+  if (temp) chunks.push(temp);
+
   return chunks;
 };

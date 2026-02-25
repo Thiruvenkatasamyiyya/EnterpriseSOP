@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import cors from "cors"
 import { connectDatabase } from "./config/dbConnect.js";
 import uploadRouter from "./routers/uploadRouter.js"
 const app = express();
@@ -8,6 +9,7 @@ const app = express();
 dotenv.config({ path : "./config/config.env"})
 
 connectDatabase();
+app.use(cors())
 app.use(express.json());
 
 
