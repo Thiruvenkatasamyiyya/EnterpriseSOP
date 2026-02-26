@@ -1,14 +1,13 @@
-
 import { GoogleGenAI } from "@google/genai";
 
-import { retrieveContext } from "../service/ragService.js"; 
+import { retrieveContext } from "../service/ragService.js";
 
-export const chatLive =   async (req, res) => {
+export const chatLive = async (req, res) => {
   const { question } = req.body;
 
-    const genAI = new GoogleGenAI({
-    apiKey: process.env.GEMINIAPIKEY
-    });
+  const genAI = new GoogleGenAI({
+    apiKey: process.env.GEMINIAPIKEY,
+  });
 
   const contextChunks = await retrieveContext(question);
 
@@ -16,9 +15,9 @@ export const chatLive =   async (req, res) => {
     return res.json({ answer: "I don't know. Not found in SOPs." });
   }
 
-  const contextText = contextChunks.map(c => c.text).join("\n");
+  const contextText = contextChunks.map((c) => c.text).join("\n");
 
-//   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  //   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = `
 Answer ONLY from the context below.
@@ -37,8 +36,7 @@ ${question}
   });
 
   res.json({
-    answer: result.text(),
-    sources: contextChunks.map(c => c.documentName)
+    answer: result.text,
+    sources: contextChunks.map((c) => c.documentName),
   });
 };
-

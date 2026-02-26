@@ -17,5 +17,10 @@ export const generateEmbedding = async (text) => {
     })
 //   const model = genAI.getGenerativeModel({ model: "embedding-001" });
 //   const result = await model.embedContent(text);
+    const embedding = response.embeddings[0].values;
+
+    if (embedding.length !== 768) {
+      console.error(`❌ Wrong dimensions! Expected 768, got ${embedding.length}`);
+    }
   return response.embeddings[0].values;
 };
