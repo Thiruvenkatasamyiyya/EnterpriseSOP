@@ -4,6 +4,8 @@ import { retrieveContext } from "../service/ragService.js";
 
 export const chatLive = async (req, res) => {
   const { question } = req.body;
+  console.log(question);
+  
 
   const genAI = new GoogleGenAI({
     apiKey: process.env.GEMINIAPIKEY,
