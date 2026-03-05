@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import { connectDatabase } from "./config/dbConnect.js";
 import uploadRouter from "./routers/uploadRouter.js"
+import authRouter from "./routers/auth.js"
 const app = express();
 
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 
 app.use('/api/v1',uploadRouter)
+app.use('/api/v1',authRouter)
 app.listen(process.env.PORT,()=>{
     console.log(`Running on port ${process.env.PORT}`);
     
