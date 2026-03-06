@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const AdminUpload = () => {
   const [file, setFile] = useState(null);
   const [msg, setMsg] = useState("");
+  const [isLoading,setIsLoading] = useState(false);
 
   const uploadPDF = async () => {
     if (!file) {
@@ -12,13 +13,14 @@ const AdminUpload = () => {
 
     const formData = new FormData();
     formData.append("pdf", file);
-
+    setIsLoading(true);
     const res = await fetch("http://localhost:3000/api/v1/upload", {
       method: "POST",
       body: formData,
     });
 
     const data = await res.json();
+    setIsLoading(false);
     setMsg(data.message);
   };
 
@@ -53,10 +55,11 @@ const AdminUpload = () => {
 
         
         <button
+          disabled = {isLoading}
           onClick={uploadPDF}
           className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition"
         >
-          Upload
+          {isLoading ? "Uploading....." : "Upload"}
         </button>
 
         {msg && (

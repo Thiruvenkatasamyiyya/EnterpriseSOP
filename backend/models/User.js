@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema(
         },
         access : {
             type : String,
+            enum : ["pending","approved","rejected"],
             default : "pending"
         },
         resetPasswordToken:String,

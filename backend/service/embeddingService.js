@@ -19,8 +19,8 @@ export const generateEmbedding = async (text) => {
 //   const result = await model.embedContent(text);
     const embedding = response.embeddings[0].values;
 
-    if (embedding.length !== 768) {
-      console.error(`❌ Wrong dimensions! Expected 768, got ${embedding.length}`);
-    }
+    // if (embedding.length !== 768) {
+    //   console.error(`❌ Wrong dimensions! Expected 768, got ${embedding.length}`);
+    // }
   return response.embeddings[0].values;
 };
