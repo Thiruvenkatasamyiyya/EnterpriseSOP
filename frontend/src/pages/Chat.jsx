@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { askQuestion } from "../api/api";
-import SideBar from "../components/sideBar";
+import SideBar from "../components/SideBar";
 import ChartBoard from "../components/ChartBoard";
 export default function Chat() {
 

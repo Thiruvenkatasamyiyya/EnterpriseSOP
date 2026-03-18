@@ -17,8 +17,8 @@ const SideBar = () => {
           </div>
         </div>
       </div>
-      <div>
-        <h1>LogIn</h1>
+      <div className="px-5 py-2 bg-blue-500 rounded-md" onClick={()=>navigate('/login')}>
+        <span className="  ">Login</span>
       </div>
     </div>
   );

@@ -51,7 +51,26 @@ console.log(chunks.length);
 export const deleteSop = catchAsyncErrors(async(req,res)=>{
   const {file} = req.body;
 
-  SopChunk.deleteMany()
+  const response = await SopChunk.deleteMany({
+    documentName : file
+  })
+  await SopDocs.deleteOne({
+    documentName : file
+  })
+
+  res.status(201).json({
+    response
+  })
 })
 
+
+// retrive documents
+
+export const retriveSop = catchAsyncErrors(async(req,res)=>{
+  const data = await SopDocs.find();
+  res.json({
+    No_docs : data.length,
+    data
+  }) 
+})
 

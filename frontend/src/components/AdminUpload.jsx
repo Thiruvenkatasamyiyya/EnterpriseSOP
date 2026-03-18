@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import DocsLog from "./DocsLog";
+import UserLog from "./UserLog";
 
 const AdminUpload = () => {
   const [file, setFile] = useState(null);
@@ -68,7 +70,12 @@ const AdminUpload = () => {
           </p>
         )}
       </div>
-      
+      <div className="max-w-xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-md">
+        <DocsLog />
+      </div>
+      <div className="max-w-xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-md"> 
+        <UserLog/>
+      </div>
     </div>
   );
 };

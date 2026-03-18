@@ -34,7 +34,8 @@ export const loginUser = catchAsyncErrors(async(req, res, next) => {
 
     const {email, password} = req.body;
 
-
+    console.log(email,password);
+    
     if(!email || !password){
         return next(new ErrorHandler("Please enter email & password",400));
     }
@@ -42,9 +43,9 @@ export const loginUser = catchAsyncErrors(async(req, res, next) => {
     // Find user in the database
     const user = await User.findOne({email}).select("+password");
 
-    if(user.access == "pending") return res.status(401).json({
-        message : "Your Status is pending"
-    })
+    // if(user.access == "pending") return res.status(401).json({
+    //     message : "Your Status is pending"
+    // })
     if(!user){
         return next(new ErrorHandler("Invalid email or password",401));
     }
@@ -55,6 +56,8 @@ export const loginUser = catchAsyncErrors(async(req, res, next) => {
     if(!isPasswordMatched){
         return next(new ErrorHandler("Invalid email or password",401));
     }
+    console.log(isPasswordMatched);
+
 
     // const token = user.getJwtToken();
 
@@ -275,4 +278,15 @@ export const deleteUser = catchAsyncErrors(async(req, res, next) => {
         success:true
     })
 
+})
+
+// profit 
+
+export const me = catchAsyncErrors(async(req,res,next)=>{
+    const user = await User.findById(req?.user?._id)
+    console.log(req?.user);
+
+    res.status(200).json({
+        user
+    })
 })

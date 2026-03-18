@@ -6,11 +6,11 @@ export default function Upload() {
 
 
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-2">
+    <div className="grid grid-cols-12 h-screen">
+      <div className="col-span-2 ">
         <SideBar />
       </div>
-      <div className="col-span-10">
+      <div className="col-span-10 overflow-y-auto">
         <AdminUpload/>
         
       </div>
