@@ -3,6 +3,7 @@ const baseUrl=import.meta.env.VITE_API_URL;
 
 export const adminApi = createApi({
   reducerPath: 'adminApi',
+  tagTypes : ["Admin"],
   baseQuery: fetchBaseQuery({ baseUrl: `${baseUrl}/api/v1`,credentials: "include" }),
   endpoints: (builder) => ({
     getAllUser: builder.query({
@@ -10,10 +11,17 @@ export const adminApi = createApi({
         url : "/admin/users",
         method : "GET"
       }),
+      providesTags : ["Admin"]
     }),
+    permitUser : builder.mutation({
+      query : (body)=>({
+        url : "/admin/permit",
+        method : "PATCH",
+        body
+      }),
+      invalidatesTags : ["Admin"]
+    })
   }),
 })
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetAllUserQuery } = adminApi
+export const { useGetAllUserQuery,usePermitUserMutation } = adminApi

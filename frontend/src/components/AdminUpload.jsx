@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DocsLog from "./DocsLog";
 import UserLog from "./UserLog";
-
+import {toast} from "react-hot-toast"
 const AdminUpload = () => {
   const [file, setFile] = useState(null);
   const [msg, setMsg] = useState("");
@@ -9,7 +9,7 @@ const AdminUpload = () => {
 
   const uploadPDF = async () => {
     if (!file) {
-      alert("Please select a PDF");
+      toast.error("Please select a PDF");
       return;
     }
 

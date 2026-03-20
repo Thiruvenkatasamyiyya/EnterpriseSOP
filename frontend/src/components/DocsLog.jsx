@@ -1,9 +1,17 @@
 import React from 'react'
-import { useGetAllDocsQuery } from '../redux/features/docs';
+import { useDeleteDocsMutation, useGetAllDocsQuery } from '../redux/features/docs';
 
 const DocsLog = () => {
     const {data,isloading,error}= useGetAllDocsQuery();
+    const [deleteSop] = useDeleteDocsMutation(); 
     console.log(data, isloading,error);
+
+    function handleDelete(file){
+
+      deleteSop({
+        file 
+      })
+    }
 
     if(isloading) return
     const d = [1,2,3]
@@ -13,8 +21,10 @@ const DocsLog = () => {
         <div>
             {data?.data.map((val,key)=>(
                 <div key={key} className='flex justify-between bg-amber-200 px-3 py-2 items-center rounded-xl shadow-md mb-4'>
-                <h2>{val?.documentName}</h2>
-                <button className='py-1 px-2 bg-amber-600 rounded-md'>delete</button>
+                <h2 >{val?.documentName}</h2>
+                <button className='py-1 px-2 bg-red-500 rounded-md text-white'
+                onClick={()=>handleDelete(val.documentName)}
+                >delete</button>
             </div>
             ))}
             

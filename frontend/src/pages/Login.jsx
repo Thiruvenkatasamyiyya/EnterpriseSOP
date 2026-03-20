@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../redux/features/authApi';
+import Header from '../components/Header';
 
 
 const Login = () => {
@@ -51,7 +52,9 @@ const Login = () => {
 
 
   return (
+    
 <div className='grid place-items-center min-h-screen bg-gray-100'>
+  {/* <Header/> */}
   <div className='bg-white p-6 rounded-xl shadow-lg w-80'>
     
     <form onSubmit={submitHandler} className='flex flex-col gap-4'>

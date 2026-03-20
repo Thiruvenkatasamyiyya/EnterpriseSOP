@@ -5,6 +5,7 @@ import sendToken from "../utils/sendToken.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
 import User from "../models/User.js";
+import { set } from "mongoose";
 
 // Register User => api/v1/register
 
@@ -43,9 +44,9 @@ export const loginUser = catchAsyncErrors(async(req, res, next) => {
     // Find user in the database
     const user = await User.findOne({email}).select("+password");
 
-    // if(user.access == "pending") return res.status(401).json({
-    //     message : "Your Status is pending"
-    // })
+    if(user.access !== "approved") return res.status(401).json({
+        message : `Your Status is ${user.access}`
+    })
     if(!user){
         return next(new ErrorHandler("Invalid email or password",401));
     }
@@ -288,5 +289,28 @@ export const me = catchAsyncErrors(async(req,res,next)=>{
 
     res.status(200).json({
         user
+    })
+})
+
+// permit user
+
+export const adminPermit = catchAsyncErrors(async(req,res,next)=>{
+    const {id,action} = req.body;
+
+    const user = await User.findById(id);
+ 
+    if(!user){
+        return next(new ErrorHandler(`User not found with id ${id}`,400));
+    }
+    const response =  await User.findByIdAndUpdate(id,
+        {$set : {access : action}},
+        {new : true}
+    )
+    console.log(response);
+    
+    if(response == null) return next(new ErrorHandler("Error occurs in change permission"));
+
+    res.status(200).json({
+        response
     })
 })

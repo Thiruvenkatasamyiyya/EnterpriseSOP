@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { askQuestion } from "../api/api";
+import Header from "./Header";
+import { useAskQuestionMutation } from "../redux/features/docs";
 
 const ChartBoard = () => {
   const [question, setQuestion] = useState("");
@@ -8,26 +9,35 @@ const ChartBoard = () => {
   ]);
   const messagesEndRef = useRef(null);
 
-  const submit = async () => {
-    if (!question.trim()) return;
+  const [askQuestion,{data,error,isLoading}] = useAskQuestionMutation()
+  console.log(data,error,isLoading);
+  
+const submit = async () => {
+  if (!question.trim()) return;
 
+  const newMessages = [
+    ...messages,
+    { role: "user", content: question },
+    { role: "ai", content: "typing..." } 
+  ];
 
-    const newMessages = [
-      ...messages,
-      { role: "user", content: question }
-    ];
-    setMessages(newMessages);
-    setQuestion("");
+  setMessages(newMessages);
+  setQuestion("");
 
+  try {
+    const res = await askQuestion({ question }).unwrap();
 
-    const res = await askQuestion(question);
-
-
-    setMessages([
-      ...newMessages,
+    setMessages((prev) => [
+      ...prev.slice(0, -1),
       { role: "ai", content: res.answer }
     ]);
-  };
+  } catch (err) {
+    setMessages((prev)=>[
+      ...prev.slice(0,-1),
+      { role: "ai", content: "Something went wrong!" }
+    ]);
+  }
+};
 
 
   useEffect(() => {
@@ -37,10 +47,7 @@ const ChartBoard = () => {
   return (
     <div className="flex flex-col h-screen">
 
-     
-      <div className="p-4 border-b">
-        <h2 className="text-2xl font-bold">OpsMind AI</h2>
-      </div>
+     <Header/>
 
    
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
@@ -62,6 +69,7 @@ const ChartBoard = () => {
             >
               {msg.content}
             </div>
+            
           </div>
         ))}
 
@@ -75,6 +83,11 @@ const ChartBoard = () => {
             value={question}
             className="flex-1 border-2 border-gray-300 p-2 rounded-lg"
             onChange={(e) => setQuestion(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  submit();
+                }
+              }}
             placeholder="Ask something..."
           />
           <button

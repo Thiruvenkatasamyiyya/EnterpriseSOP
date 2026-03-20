@@ -3,7 +3,6 @@ import { GoogleGenAI } from "@google/genai";
 
 
 export const generateEmbedding = async (text) => {
-    console.log(process.env.GEMINIAPIKEY);
 
     const genAI = new GoogleGenAI({
   apiKey: process.env.GEMINIAPIKEY

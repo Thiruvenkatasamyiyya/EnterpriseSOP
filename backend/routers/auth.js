@@ -4,7 +4,7 @@ import express from "express";
 // import {registerUser, loginUser, logout, forgotPassword, resetPassword, updatePassword,allUsers,getUserDetails,updateUser,deleteUser} from "../controllers/userController.js";
 
 import { isAuthenticatedUser,authorizeRoles } from "../middlewares/auth.js";
-import { allUsers, deleteUser, forgotPassword, getUserDetails, loginUser, logout, me, registerUser, resetPassword, updatePassword, updateUser } from "../controller/userController.js";
+import { adminPermit, allUsers, deleteUser, forgotPassword, getUserDetails, loginUser, logout, me, registerUser, resetPassword, updatePassword, updateUser } from "../controller/userController.js";
 
 
 const router = express.Router();
@@ -24,5 +24,6 @@ router.route("/admin/users/:id")
 .get(isAuthenticatedUser, authorizeRoles("admin"),getUserDetails)
 .put(isAuthenticatedUser, authorizeRoles("admin"),updateUser)
 .delete(isAuthenticatedUser, authorizeRoles("admin"),deleteUser)
+router.route("/admin/permit").patch(isAuthenticatedUser,adminPermit)
 
 export default router;
