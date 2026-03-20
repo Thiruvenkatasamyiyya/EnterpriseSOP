@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DocsLog from "./DocsLog";
 import UserLog from "./UserLog";
 import {toast} from "react-hot-toast"
+const baseUrl=import.meta.env.VITE_API_URL;
 const AdminUpload = () => {
   const [file, setFile] = useState(null);
   const [msg, setMsg] = useState("");
@@ -16,7 +17,7 @@ const AdminUpload = () => {
     const formData = new FormData();
     formData.append("pdf", file);
     setIsLoading(true);
-    const res = await fetch("http://localhost:3000/api/v1/upload", {
+    const res = await fetch(`${baseUrl}/api/v1/upload`, {
       method: "POST",
       body: formData,
     });
