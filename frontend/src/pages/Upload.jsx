@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SideBar from "../components/sideBar";
+import SideBar from "../components/SideBar";
 import AdminUpload from "../components/AdminUpload";
 
 export default function Upload() {
