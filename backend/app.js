@@ -14,7 +14,7 @@ dotenv.config({ path : "./config/config.env"})
 connectDatabase();
 app.use(cors({
     origin : [
-        "https://enterprisesop.netlify.app/",
+        'https://enterprisesop.netlify.app',
         "http://localhost:5173"],
      credentials: true,
 }))
