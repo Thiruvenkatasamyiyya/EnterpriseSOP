@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 export const connectDatabase = () => {
 
-    mongoose.connect((process.env.MONGODBURL)).then((con) => {
+    mongoose.connect((global.process.env.MONGODBURL)).then((con) => {
 
         console.log(`MongoDB Database connected with ${con.connection.host}`)
         
