@@ -5,7 +5,7 @@ import sendToken from "../utils/sendToken.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
 import User from "../models/User.js";
-import { set } from "mongoose";
+
 
 // Register User => api/v1/register
 
@@ -43,13 +43,14 @@ export const loginUser = catchAsyncErrors(async(req, res, next) => {
 
     // Find user in the database
     const user = await User.findOne({email}).select("+password");
+    if(!user){
+        return next(new ErrorHandler("Invalid email or password",401));
+    }
 
     if(user.access !== "approved") return res.status(401).json({
         message : `Your Status is ${user.access}`
     })
-    if(!user){
-        return next(new ErrorHandler("Invalid email or password",401));
-    }
+
 
     // Check if password is correct
     const isPasswordMatched = await user.comparePassword(password)
@@ -214,7 +215,9 @@ export const updatePassword = catchAsyncErrors(async(req, res, next) => {
 
 export const allUsers = catchAsyncErrors(async(req, res, next) => {
 
-    const users = await User.find({});
+    const users = await User.find({
+         role: { $ne: "admin" }
+    });
 
     res.status(200).json({
         users

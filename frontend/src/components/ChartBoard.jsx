@@ -1,8 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import Header from "./Header";
 import { useAskQuestionMutation } from "../redux/features/docs";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const ChartBoard = () => {
+  const {isAuthenticated} = useSelector((state)=> state.auth)
+  console.log(isAuthenticated);
+  
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([
     {role : "ai", content: "Hello! How can I assist you today?"}
@@ -44,6 +49,9 @@ const submit = async () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  function validUser(){
+    if(!isAuthenticated) toast.error("Login to get access")
+  }
   return (
     <div className="flex flex-col h-screen">
 
@@ -81,6 +89,8 @@ const submit = async () => {
         <div className="flex gap-2">
           <input
             value={question}
+            disabled = {!isAuthenticated}
+            
             className="flex-1 border-2 border-gray-300 p-2 rounded-lg"
             onChange={(e) => setQuestion(e.target.value)}
               onKeyDown={(e) => {
