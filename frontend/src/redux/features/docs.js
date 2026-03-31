@@ -3,7 +3,7 @@ const baseUrl=import.meta.env.VITE_API_URL;
 export const docsApi = createApi({
   reducerPath: 'docsApi',
   tagTypes : ["Docs"],
-  baseQuery: fetchBaseQuery({ baseUrl: `${baseUrl}/api/v1/` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${baseUrl}/api/v1/`, credentials: "include" }),
   endpoints: (builder) => ({
     askQuestion : builder.mutation({
       query : (body)=>({
