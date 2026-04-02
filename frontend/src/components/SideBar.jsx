@@ -1,8 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "../redux/features/authApi";
+import { useSelector } from "react-redux";
 
 const SideBar = () => {
   const navigate = useNavigate();
+  const [logout,{isLoading,isError}] = useLogoutMutation()
+  const {isAuthenticated} = useSelector((state)=> state.auth)
   return (
     <div className=" bg-blue-900 h-screen p-4 flex flex-col justify-between text-white">
       <div>
@@ -31,8 +35,8 @@ const SideBar = () => {
           <span className="  ">Login</span>
         </div>
         <div
-          className="px-5 py-2 bg-blue-500 rounded-md"
-          
+          className={`px-5 py-2 bg-blue-500 rounded-md ${!isAuthenticated && "hidden"}`}
+          onClick={()=> logout()}
         >
           <span className="  ">Logout</span>
         </div>

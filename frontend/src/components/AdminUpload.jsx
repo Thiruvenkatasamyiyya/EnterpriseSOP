@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DocsLog from "./DocsLog";
 import UserLog from "./UserLog";
 import {toast} from "react-hot-toast"
+import Header from "./Header";
 const baseUrl=import.meta.env.VITE_API_URL;
 const AdminUpload = () => {
   const [file, setFile] = useState(null);
@@ -29,9 +30,7 @@ const AdminUpload = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="p-4 border-b bg-white shadow-sm">
-        <h2 className="text-2xl font-bold text-gray-800">OpsMind AI</h2>
-      </div>
+      <Header/>
 
       <div className="max-w-xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-md">
         <h2 className="text-xl font-semibold mb-6 text-gray-700">
