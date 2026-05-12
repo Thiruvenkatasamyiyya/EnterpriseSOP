@@ -4,6 +4,7 @@ import cors from "cors"
 import { connectDatabase } from "./config/dbConnect.js";
 import uploadRouter from "./routers/uploadRouter.js"
 import authRouter from "./routers/auth.js"
+import { chatLive } from "./controller/chatController.js";
 import cookieParser from "cookie-parser";
 import error from "./middlewares/error.js";
 const app = express();
@@ -21,8 +22,9 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser())
 
-app.use('/api/v1',uploadRouter)
+app.use('/api/v1/sop', uploadRouter)
 app.use('/api/v1',authRouter)
+app.post('/api/v1/chat', chatLive)
 
 app.use(error)
 app.listen(process.env.PORT,()=>{

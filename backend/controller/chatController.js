@@ -2,8 +2,14 @@ import { GoogleGenAI } from "@google/genai";
 
 import { retrieveContext } from "../service/ragService.js";
 
-export const chatLive = async (req, res) => {
+import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import ErrorHandler from "../utils/errorHandler.js";
+
+export const chatLive = catchAsyncErrors(async (req, res, next) => {
   const { question } = req.body;
+  if (!question) {
+    return next(new ErrorHandler("Please provide a question", 400));
+  }
   console.log(question);
   
 
@@ -41,4 +47,4 @@ ${question}
     answer: result.text,
     sources: contextChunks.map((c) => c.documentName),
   });
-};
+});

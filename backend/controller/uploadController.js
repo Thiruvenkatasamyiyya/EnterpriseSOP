@@ -4,7 +4,7 @@ import SopChunk from "../models/SopChunk.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import SopDocs from "../models/SopDocs.js";
 
-export const uploadSop = async (req, res) => {
+export const uploadSop = catchAsyncErrors(async (req, res, next) => {
   const chunks = await extractChunksFromPDF(req.file.path);
   await SopDocs.create({
     documentName: req.file.originalname,
@@ -31,7 +31,7 @@ export const uploadSop = async (req, res) => {
   }
 
   res.json({ message: "SOP Uploaded & Indexed Successfully" });
-};
+});
 
 export const deleteSop = catchAsyncErrors(async (req, res) => {
   const { file } = req.body;

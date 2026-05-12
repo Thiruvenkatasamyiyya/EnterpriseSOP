@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">34.37% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/32</span>
+                <span class='fraction'>32/32</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">29.62% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/27</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,44 +118,44 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -165,45 +165,45 @@ import SopChunk from "../models/SopChunk.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import SopDocs from "../models/SopDocs.js";
 &nbsp;
-export const uploadSop = <span class="fstat-no" title="function not covered" >async (r</span>eq, res) =&gt; {
-  const chunks = <span class="cstat-no" title="statement not covered" >await extractChunksFromPDF(req.file.path);</span>
-<span class="cstat-no" title="statement not covered" >  await SopDocs.create({</span>
+export const uploadSop = catchAsyncErrors(async (req, res, next) =&gt; {
+  const chunks = await extractChunksFromPDF(req.file.path);
+  await SopDocs.create({
     documentName: req.file.originalname,
     chunks: chunks.length,
   });
-<span class="cstat-no" title="statement not covered" >  console.log(chunks.length);</span>
+  console.log(chunks.length);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  for (let i = <span class="cstat-no" title="statement not covered" >0; i</span> &lt; chunks.length; i++) {</span>
-    const chunk = <span class="cstat-no" title="statement not covered" >chunks[i];</span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const embedding = <span class="cstat-no" title="statement not covered" >await generateEmbedding(chunk);</span>
-<span class="cstat-no" title="statement not covered" >      await SopChunk.create({</span>
+  for (let i = 0; i &lt; chunks.length; i++) {
+    const chunk = chunks[i];
+    try {
+      const embedding = await generateEmbedding(chunk);
+      await SopChunk.create({
         text: chunk,
         embedding,
         documentName: req.file.originalname,
       });
-<span class="cstat-no" title="statement not covered" >      console.log(`✅ Processed chunk ${i + 1}/${chunks.length}`);</span>
-<span class="cstat-no" title="statement not covered" >      if (i &lt; chunks.length - 1) {</span>
-<span class="cstat-no" title="statement not covered" >        await new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve) =&gt; <span class="cstat-no" title="statement not covered" >setTimeout(resolve, 600));</span></span>
+      console.log(`✅ Processed chunk ${i + 1}/${chunks.length}`);
+      if (i &lt; chunks.length - 1) {
+        await new Promise((resolve) =&gt; setTimeout(resolve, 600));
       }
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      console.error(`❌ Failed on chunk ${i + 1}:`, error.message);</span>
+      console.error(`❌ Failed on chunk ${i + 1}:`, error.message);
     }
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  res.json({ message: "SOP Uploaded &amp; Indexed Successfully" });</span>
-};
-&nbsp;
-export const deleteSop = catchAsyncErrors(<span class="fstat-no" title="function not covered" >async (r</span>eq, res) =&gt; {
-  const { file } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-  const response = <span class="cstat-no" title="statement not covered" >await SopChunk.deleteMany({ documentName: file });</span>
-<span class="cstat-no" title="statement not covered" >  await SopDocs.deleteOne({ documentName: file });</span>
-<span class="cstat-no" title="statement not covered" >  res.status(201).json({ response });</span>
+  res.json({ message: "SOP Uploaded &amp; Indexed Successfully" });
 });
 &nbsp;
-export const retriveSop = catchAsyncErrors(<span class="fstat-no" title="function not covered" >async (r</span>eq, res) =&gt; {
-  const data = <span class="cstat-no" title="statement not covered" >await SopDocs.find();</span>
-<span class="cstat-no" title="statement not covered" >  res.json({</span>
+export const deleteSop = catchAsyncErrors(async (req, res) =&gt; {
+  const { file } = req.body;
+  const response = await SopChunk.deleteMany({ documentName: file });
+  await SopDocs.deleteOne({ documentName: file });
+  res.status(201).json({ response });
+});
+&nbsp;
+export const retriveSop = catchAsyncErrors(async (req, res) =&gt; {
+  const data = await SopDocs.find();
+  res.json({
     No_docs: data.length,
     data,
   });
@@ -214,7 +214,7 @@ export const retriveSop = catchAsyncErrors(<span class="fstat-no" title="functio
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-04-23T14:21:41.192Z
+                at 2026-05-12T02:43:31.936Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

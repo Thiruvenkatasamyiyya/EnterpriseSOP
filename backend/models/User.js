@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
         password:{
             type:String,
             required:[true, "Plese enter your password"],
-            minlength:[6, "Your password must be longer than 6 characters"],
+            minlength:[4, "Your password must be longer than 4 characters"],
             select:false
         },
         role:{
@@ -39,9 +39,9 @@ const userSchema = new mongoose.Schema(
 )
 
 // Encrypting password before saving the user
-userSchema.pre("save", async function(next){
+userSchema.pre("save", async function(){
     if(!this.isModified("password")){
-        next()
+        return;
     }
     this.password = await bcrypt.hash(this.password, 10)
 })

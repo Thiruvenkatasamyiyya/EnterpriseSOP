@@ -24,6 +24,6 @@ router.route("/admin/users/:id")
 .get(isAuthenticatedUser, authorizeRoles("admin"),getUserDetails)
 .put(isAuthenticatedUser, authorizeRoles("admin"),updateUser)
 .delete(isAuthenticatedUser, authorizeRoles("admin"),deleteUser)
-router.route("/admin/permit").patch(isAuthenticatedUser,adminPermit)
+router.route("/admin/permit").post(isAuthenticatedUser,adminPermit)
 
 export default router;

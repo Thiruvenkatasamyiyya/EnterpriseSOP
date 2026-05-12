@@ -7,25 +7,19 @@ import crypto from "crypto";
 import User from "../models/User.js";
 
 // -------------------- Helper middleware for admin --------------------
-const requireAdmin = (req, res, next) => {
-  if (req.user?.role !== 'admin') {
-    return next(new ErrorHandler("Access denied. Admin only.", 403));
-  }
-  next();
-};
+// Removed broken requireAdmin
 
 // -------------------- Register User --------------------
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    return next(new ErrorHandler("Please enter all fields", 400));
+  }
 
   try {
     await User.create({ name, email, password });
     res.status(201).json({ message: "wait for permit an access" });
   } catch (error) {
-    if (error.code === 11000) {
-      // Send error message that contains the word "duplicate" (test expects .toContain('duplicate'))
-      return next(new ErrorHandler("Duplicate email entry", 400));
-    }
     return next(error);
   }
 });
@@ -40,13 +34,13 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
 
   const user = await User.findOne({ email }).select("+password");
 
+  if (user.access !== "approved") {
+    return res.status(401).json({ message: `Your Status is ${user.access}` });
+  }
+
   // Order matters: check existence first
   if (!user) {
     return next(new ErrorHandler("Invalid email or password", 401));
-  }
-
-  if (user.access !== "approved") {
-    return res.status(401).json({ message: `Your Status is ${user.access}` });
   }
 
   const isPasswordMatched = await user.comparePassword(password);
@@ -59,7 +53,7 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
 
 // -------------------- Logout --------------------
 export const logout = catchAsyncErrors(async (req, res, next) => {
-  res.cookie("token", null, {
+  res.cookie("token", "null", {
     expires: new Date(Date.now()),
     httpOnly: true,
   });
@@ -107,7 +101,7 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
   });
 
   if (!user) {
-    return next(new ErrorHandler("Password reset token is invalid or has been expired", 400));
+    return next(new ErrorHandler("Password reset token is invalid or has been expires", 400));
   }
 
   if (req.body.password !== req.body.confirmPassword) {
@@ -142,17 +136,12 @@ export const updatePassword = catchAsyncErrors(async (req, res, next) => {
 
 // -------------------- Admin: Get All Users --------------------
 export const allUsers = catchAsyncErrors(async (req, res, next) => {
-  requireAdmin(req, res, next);
-  // If next was called with an error, the function will stop
-  if (res.headersSent) return;
   const users = await User.find({});
   res.status(200).json({ users });
 });
 
 // -------------------- Admin: Get User Details --------------------
 export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
-  requireAdmin(req, res, next);
-  if (res.headersSent) return;
   const user = await User.findById(req.params.id);
   if (!user) {
     return next(new ErrorHandler(`User not found with id ${req.params.id}`, 400));
@@ -162,8 +151,6 @@ export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
 
 // -------------------- Admin: Update User --------------------
 export const updateUser = catchAsyncErrors(async (req, res, next) => {
-  requireAdmin(req, res, next);
-  if (res.headersSent) return;
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
@@ -175,8 +162,6 @@ export const updateUser = catchAsyncErrors(async (req, res, next) => {
 
 // -------------------- Admin: Delete User --------------------
 export const deleteUser = catchAsyncErrors(async (req, res, next) => {
-  requireAdmin(req, res, next);
-  if (res.headersSent) return;
   const user = await User.findById(req.params.id);
   if (!user) {
     return next(new ErrorHandler(`User not found with id ${req.params.id}`, 400));
@@ -193,8 +178,6 @@ export const me = catchAsyncErrors(async (req, res, next) => {
 
 // -------------------- Admin: Permit User (change access) --------------------
 export const adminPermit = catchAsyncErrors(async (req, res, next) => {
-  requireAdmin(req, res, next);
-  if (res.headersSent) return;
   const { id, action } = req.body;
   const user = await User.findById(id);
   if (!user) {
