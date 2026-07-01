@@ -38,10 +38,10 @@ const SideBar = () => {
         </div>
         <div
           className={`px-5 py-2 bg-blue-500 rounded-md ${!isAuthenticated && "hidden"}`}
-          onClick={() => {
-            logout()
+          onClick={async () => {
+            await logout()
             isSuccess && toast.success("Logged Out Successfully")
-            window.location.reload()
+            setTimeout(() => window.location.reload(), 2000)
           }}
         >
           <span className="  ">Logout</span>
