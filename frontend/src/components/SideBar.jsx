@@ -2,10 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../redux/features/authApi";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const SideBar = () => {
   const navigate = useNavigate();
-  const [logout,{isLoading,isError}] = useLogoutMutation()
+  const [logout,{isSuccess,isLoading,isError}] = useLogoutMutation()
+  
   const {isAuthenticated} = useSelector((state)=> state.auth)
   return (
     <div className=" bg-blue-900 h-screen p-4 flex flex-col justify-between text-white">
@@ -36,7 +38,11 @@ const SideBar = () => {
         </div>
         <div
           className={`px-5 py-2 bg-blue-500 rounded-md ${!isAuthenticated && "hidden"}`}
-          onClick={()=> logout()}
+          onClick={() => {
+            logout()
+            isSuccess && toast.success("Logged Out Successfully")
+            window.location.reload()
+          }}
         >
           <span className="  ">Logout</span>
         </div>
