@@ -12,7 +12,6 @@ export default (user, statusCode, res) => {
         httpOnly:true,
         // secure:false, // development
         secure : true,
-        sameSite : "None"
 
     };
 
