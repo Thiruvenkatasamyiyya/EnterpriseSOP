@@ -103,22 +103,24 @@ export const forgotPassword = catchAsyncErrors(async(req, res, next) => {
 
     // Get reset password token
 
-    const resetToken = user.getResetPasswordToken();
-
-    await user.save();
-
+    const resetToken = await user.getResetPasswordToken();
+    
+    await user.save(); 
+    console.log("fine");
+    
     // Create a reset password url
 
     const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
     const message = getResetPasswordTemplate(user, resetUrl);
 
-
+    console.log(resetUrl);
+    
     try{
 
         await sendEmail({
             email:user.email,
-            subject:"Ecom password recovery",
+            subject:"password recovery",
             message
         });
 
@@ -145,9 +147,10 @@ export const forgotPassword = catchAsyncErrors(async(req, res, next) => {
 export const resetPassword = catchAsyncErrors(async(req, res, next) => {
 
     // Hash the URL TOKEN
+    console.log(req.params.token);
 
     const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
-
+    
     const user = await User.findOne({
         resetPasswordToken,
         resetPasswordExpire:{$gt:Date.now()}

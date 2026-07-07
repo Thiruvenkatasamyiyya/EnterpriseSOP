@@ -9,6 +9,11 @@ const SideBar = () => {
   const [logout,{isSuccess,isLoading,isError}] = useLogoutMutation()
   
   const {isAuthenticated} = useSelector((state)=> state.auth)
+  function handleLogout() {
+    logout()
+    isSuccess && toast.success("Logged Out Successfully")
+    setTimeout(() => window.location.reload(), 2000)
+  }
   return (
     <div className=" bg-blue-900 h-screen p-4 flex flex-col justify-between text-white">
       <div>
@@ -38,11 +43,7 @@ const SideBar = () => {
         </div>
         <div
           className={`px-5 py-2 bg-blue-500 rounded-md ${!isAuthenticated && "hidden"}`}
-          onClick={async () => {
-            await logout()
-            isSuccess && toast.success("Logged Out Successfully")
-            setTimeout(() => window.location.reload(), 2000)
-          }}
+          onClick={handleLogout}
         >
           <span className="  ">Logout</span>
         </div>

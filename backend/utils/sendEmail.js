@@ -7,11 +7,15 @@ const sendEmail = async (options) => {
     var transport = nodemailer.createTransport({
         host:process.env.SMTP_HOST,
         port:process.env.SMTP_PORT,
+        secure : false,
         auth: {
-        user:process.env.SMTP_EMAIL,
-        pass:process.env.SMTP_PASSWORD 
+        user:process.env.SMPT_EMAIL_GMAIL,
+        pass:process.env.SMTP_EMAIL_PASSWORD
         }
+        
     });
+    console.log(process.env.SMTP_EMAIL_GMAIL);
+    console.log(process.env.SMTP_EMAIL_PASSWORD);
 
     const message = {
         from:`${process.env.SMTP_FROM_NAME} <${process.env.SMTP_FROM_EMAIL}>`,

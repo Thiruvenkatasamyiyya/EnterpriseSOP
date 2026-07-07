@@ -9,17 +9,7 @@ export const uploadSop = async (req, res) => {
   const docs = await SopDocs.create({
     documentName : req.file.originalname,
     chunks : chunks.length
-  })
-console.log(chunks.length);
-
-  // for (let chunk of chunks) {
-  //   const embedding = await generateEmbedding(chunk);
-  //   await SopChunk.create({
-  //     text: chunk,
-  //     embedding,
-  //     documentName: req.file.originalname
-  //   });
-  // }
+  });
 
    for (let i = 0; i < chunks.length; i++) {
     const chunk = chunks[i];

@@ -7,6 +7,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import { useSelector } from 'react-redux'
 import ProtectRouter from './components/ProtectRouter'
+import ForgetPassword from './pages/ForgetPassword'
+import ResetPassword from './pages/ResetPassword'
 const App = () => {
     const {user} = useSelector((state) => state.auth)
   
@@ -22,6 +24,8 @@ const App = () => {
            }/>
           <Route path='/' element={<Chat/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/password/forgot" element={<ForgetPassword/>}/>
+          <Route path="/password/reset/:token" element={<ResetPassword/>}/>
           <Route path="/register" element={<Register/>}/>
         </Routes>
       </div>
